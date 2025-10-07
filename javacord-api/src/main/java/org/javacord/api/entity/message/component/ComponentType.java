@@ -11,7 +11,11 @@ public enum ComponentType {
     SELECT_MENU_USER(5, true),
     SELECT_MENU_ROLE(6, true),
     SELECT_MENU_MENTIONABLE(7, true),
-    SELECT_MENU_CHANNEL(8, true);
+    SELECT_MENU_CHANNEL(8, true),
+    TEXT_LABEL(10, false),
+    GRID(12, false),
+    DIVIDER(14, false),
+    LAYOUT(17, false);
 
     private static final ComponentType[] selectMenuTypes = Arrays.stream(ComponentType.values())
             .filter(ComponentType::isSelectMenuType)

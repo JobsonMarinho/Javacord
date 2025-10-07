@@ -25,7 +25,8 @@ import org.javacord.api.interaction.MessageInteraction;
 import org.javacord.api.util.DiscordRegexPattern;
 import org.javacord.core.DiscordApiImpl;
 import org.javacord.core.entity.emoji.UnicodeEmojiImpl;
-import org.javacord.core.entity.message.component.ActionRowImpl;
+
+import org.javacord.core.entity.message.component.ComponentFactory;
 import org.javacord.core.entity.message.embed.EmbedImpl;
 import org.javacord.core.entity.server.ServerImpl;
 import org.javacord.core.entity.sticker.StickerItemImpl;
@@ -351,8 +352,8 @@ public class MessageImpl implements Message, InternalMessageAttachableListenerMa
         if (data.has("components")) {
             components.clear();
             for (JsonNode componentJson : data.get("components")) {
-                ActionRowImpl actionRow = new ActionRowImpl(componentJson);
-                components.add(actionRow);
+                HighLevelComponent component = ComponentFactory.createHighLevelComponent(componentJson);
+                components.add(component);
             }
         }
 

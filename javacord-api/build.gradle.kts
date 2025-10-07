@@ -14,6 +14,7 @@ dependencies {
     // For old @Generated annotation in Java 9
     // can be replaced by javax.annotation.processing.Generated if Java 9 is minimum requirement
     compileOnly("javax.annotation:javax.annotation-api:1.3.2")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.20.0")
 }
 
 java {

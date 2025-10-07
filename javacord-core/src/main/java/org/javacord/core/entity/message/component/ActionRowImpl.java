@@ -24,23 +24,7 @@ public class ActionRowImpl extends ComponentImpl implements ActionRow {
         this.components = new ArrayList<>();
         if (data.has("components")) {
             for (JsonNode componentJson : data.get("components")) {
-                int typeInt = componentJson.get("type").asInt();
-                ComponentType type = ComponentType.fromId(typeInt);
-
-
-                if (type == ComponentType.BUTTON) {
-                    components.add(new ButtonImpl(componentJson));
-                } else if (type.isSelectMenuType()) {
-                    components.add(new SelectMenuImpl(componentJson));
-                } else if (type == ComponentType.TEXT_INPUT) {
-                    components.add(new TextInputImpl(componentJson));
-                } else {
-                    throw new IllegalStateException(
-                            String.format(
-                                    "Couldn't parse the component of type '%d'. Please contact the developer!", typeInt
-                            )
-                    );
-                }
+                components.add((LowLevelComponent) ComponentFactory.createComponent(componentJson));
             }
         }
     }

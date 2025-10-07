@@ -23,4 +23,22 @@ public interface HighLevelComponent extends Component, Specializable<HighLevelCo
         return isActionRow() ? Optional.of((ActionRow) this) : Optional.empty();
     }
 
+    /**
+     * Whether this component is of this type.
+     *
+     * @return True if it's of that type.
+     */
+    default boolean isLayoutComponent() {
+        return getType() == ComponentType.LAYOUT;
+    }
+
+    /**
+     * Gets the component as a LayoutComponent if it's of that type.
+     *
+     * @return The LayoutComponent.
+     */
+    default Optional<LayoutComponent> asLayoutComponent() {
+        return isLayoutComponent() ? Optional.of((LayoutComponent) this) : Optional.empty();
+    }
+
 }
