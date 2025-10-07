@@ -17,6 +17,7 @@ dependencies {
     // OkHttp for REST-calls
     implementation(platform("com.squareup.okhttp3:okhttp-bom:4.9.3"))
 
+
     // define any required OkHttp artifacts without version
     implementation("com.squareup.okhttp3:okhttp")
     implementation("com.squareup.okhttp3:logging-interceptor")
@@ -24,7 +25,7 @@ dependencies {
     // the JSON-lib because Discord returns in JSON format
     // Update when upgrading to Java 11+
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.12.7.1")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.20.0")
 
     // the web socket
     implementation("com.neovisionaries:nv-websocket-client:2.14")
