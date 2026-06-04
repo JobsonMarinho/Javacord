@@ -61,6 +61,41 @@ public interface TextInput extends LowLevelComponent {
     Optional<String> getPlaceholder();
 
     /**
+     * Creates a new text input without a label, for use inside a {@link Label} component.
+     *
+     * <p>When a text input is wrapped in a {@link Label}, it must not carry its own label: the
+     * visible label is provided by the {@code Label}. Discord rejects a text input that sets a
+     * (non-empty) label inside a label component with the error
+     * {@code TEXT_INPUT_COMPONENT_LABEL_IN_LABEL_COMPONENT} (HTTP 400).
+     *
+     * @param style    The style of the text input.
+     * @param customId The custom ID for the text input.
+     * @return The created text input.
+     */
+    static TextInput create(TextInputStyle style, String customId) {
+        return new TextInputBuilder(style, customId, null).build();
+    }
+
+    /**
+     * Creates a new text input without a label, for use inside a {@link Label} component.
+     *
+     * <p>When a text input is wrapped in a {@link Label}, it must not carry its own label: the
+     * visible label is provided by the {@code Label}. Discord rejects a text input that sets a
+     * (non-empty) label inside a label component with the error
+     * {@code TEXT_INPUT_COMPONENT_LABEL_IN_LABEL_COMPONENT} (HTTP 400).
+     *
+     * @param style    The style of the text input.
+     * @param customId The custom ID for the text input.
+     * @param required Whether this text input is required.
+     * @return The created text input.
+     */
+    static TextInput create(TextInputStyle style, String customId, boolean required) {
+        return new TextInputBuilder(style, customId, null)
+                .setRequired(required)
+                .build();
+    }
+
+    /**
      * Creates a new text input with the given values.
      *
      * @param style    The style of the text input

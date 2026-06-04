@@ -24,7 +24,10 @@ public class LabelImpl extends ComponentImpl implements Label {
      */
     public LabelImpl(JsonNode data) {
         super(ComponentType.LABEL);
-        this.label = data.get("label").asText();
+        // On modal submit, Discord sends the label component without its "label" (and
+        // "description") field, since those are display-only and not submitted data.
+        this.label = data.has("label") && !data.get("label").isNull()
+                ? data.get("label").asText() : null;
         this.description = data.has("description") && !data.get("description").isNull()
                 ? data.get("description").asText() : null;
         this.component = (LowLevelComponent) ComponentFactory.createComponent(data.get("component"));
