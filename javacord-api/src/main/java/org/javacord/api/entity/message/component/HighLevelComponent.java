@@ -41,4 +41,22 @@ public interface HighLevelComponent extends Component, Specializable<HighLevelCo
         return isLayoutComponent() ? Optional.of((LayoutComponent) this) : Optional.empty();
     }
 
+    /**
+     * Whether this component is of this type.
+     *
+     * @return True if it's of that type.
+     */
+    default boolean isLabel() {
+        return getType() == ComponentType.LABEL;
+    }
+
+    /**
+     * Gets the component as a Label if it's of that type.
+     *
+     * @return The Label.
+     */
+    default Optional<Label> asLabel() {
+        return isLabel() ? Optional.of((Label) this) : Optional.empty();
+    }
+
 }

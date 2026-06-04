@@ -37,4 +37,31 @@ public interface ModalInteraction extends InteractionBase {
      */
     Optional<String> getTextInputValueByCustomId(String customId);
 
+    /**
+     * Get whether a checkbox is checked by its custom id.
+     * This is a shorthand method to avoid iterating the nested components by yourself.
+     *
+     * @param customId The custom ID of the component.
+     * @return Whether the checkbox with the id is checked, or empty if no such checkbox exists.
+     */
+    Optional<Boolean> getCheckboxValueByCustomId(String customId);
+
+    /**
+     * Get the value selected in a radio group by its custom id.
+     * This is a shorthand method to avoid iterating the nested components by yourself.
+     *
+     * @param customId The custom ID of the component.
+     * @return The selected value of the radio group component with the id.
+     */
+    Optional<String> getRadioGroupValueByCustomId(String customId);
+
+    /**
+     * Get the values selected in a checkbox group by its custom id.
+     * This is a shorthand method to avoid iterating the nested components by yourself.
+     *
+     * @param customId The custom ID of the component.
+     * @return The selected values of the checkbox group component with the id.
+     */
+    List<String> getCheckboxGroupValuesByCustomId(String customId);
+
 }

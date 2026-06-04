@@ -27,7 +27,7 @@ if (JavaVersion.current().java9Compatible) {
             description 'Compiles main Java 9 source'
             source 'src/main/java9/'
             classpath = files()
-            destinationDirectory = file("$buildDir/classes/java9/main")
+            destinationDirectory = layout.buildDirectory.dir('classes/java9/main')
             sourceCompatibility = 9
             targetCompatibility = 9
             options.compilerArgs << '--patch-module' << ("org.javacord.$shortName=${compileJava.destinationDirectory.get()}" as String)
@@ -51,7 +51,10 @@ if (JavaVersion.current().java9Compatible) {
 
     project(':javacord-api') {
         task generateModuleInfo {
-            ext.outputDirectory = "$buildDir/generated/module-info"
+            // The API main sources include the generated listener manager interfaces, so this task
+            // (which reads sourceSets.main.allJava) must run after they have been generated.
+            dependsOn ':generateListenerManagers'
+            ext.outputDirectory = layout.buildDirectory.dir('generated/module-info').get().asFile
 
             inputs.files sourceSets.main.allJava withPropertyName 'javaFiles' withPathSensitivity PathSensitivity.RELATIVE
             outputs.dir outputDirectory withPropertyName 'outputDirectory'

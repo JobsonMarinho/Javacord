@@ -2,8 +2,7 @@ import java.time.Instant
 
 plugins {
     `java-library`
-    id("com.gorylenko.gradle-git-properties") version "2.4.1"
-    id("biz.aQute.bnd.builder") version "6.3.1"
+    id("biz.aQute.bnd.builder") version "7.1.0"
 }
 
 repositories {
@@ -26,10 +25,42 @@ java {
  * Generate a "git.properties" file with additional information about the current
  * version and the build timestamp. Used by the Javacord class to provide static
  * methods like "Javacord.VERSION" and "Javacord.COMMIT_ID".
+ *
+ * This used to rely on the "com.gorylenko.gradle-git-properties" plugin, but its
+ * latest release is incompatible with Gradle 9 / Java 25, so we generate the few
+ * properties the Javacord class actually reads ourselves via the git CLI.
  */
-gitProperties {
-    customProperty("version", version)
-    customProperty("buildTimestamp", Instant.now())
+val gitPropertiesDir = layout.buildDirectory.dir("generated/sources/git-properties")
+val generateGitProperties by tasks.registering {
+    val outputDir = gitPropertiesDir
+    val projectVersion = version.toString()
+    val gitDir = rootProject.projectDir
+    outputs.dir(outputDir)
+    // The build timestamp changes on every run, so this task is intentionally not cacheable.
+    outputs.upToDateWhen { false }
+    doLast {
+        val commitId = try {
+            val process = ProcessBuilder("git", "rev-parse", "--short", "HEAD")
+                .directory(gitDir)
+                .redirectErrorStream(true)
+                .start()
+            val output = process.inputStream.bufferedReader().use { it.readText() }.trim()
+            if (process.waitFor() == 0 && output.isNotEmpty()) output else "<unknown>"
+        } catch (e: Exception) {
+            "<unknown>"
+        }
+        val file = outputDir.get().file("git.properties").asFile
+        file.parentFile.mkdirs()
+        file.writeText(
+            "version=$projectVersion\n"
+                + "git.commit.id.abbrev=$commitId\n"
+                + "buildTimestamp=${Instant.now()}\n"
+        )
+    }
+}
+
+sourceSets.main {
+    resources.srcDir(generateGitProperties)
 }
 
 tasks.jar {

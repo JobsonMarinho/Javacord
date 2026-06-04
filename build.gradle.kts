@@ -6,8 +6,7 @@ plugins {
     `java-library`
     `maven-publish`
     signing
-    id("com.github.johnrengelman.shadow") version "7.1.2" apply false
-    id("net.researchgate.release") version "3.0.2" apply false
+    id("com.gradleup.shadow") version "9.4.2" apply false
 }
 
 repositories {
@@ -155,8 +154,9 @@ publishing {
         named<MavenPublication>("javacord") {
             // add the dependencies to the POM
             from(components["java"])
-            // but do not try to publish the JAR
-            artifacts.removeAll { it.classifier == null && it.extension == "jar" }
+            // The root project is an aggregator; it publishes a POM with the api/core dependencies
+            // plus an (empty) jar. Gradle 9 no longer allows removing the jar artifact after the
+            // publication has been populated, so it is published as-is.
         }
     }
 }
@@ -169,7 +169,8 @@ subprojects {
             encoding = "UTF-8"
             docTitle = "Javacord ${project.version} (${project.property("shortName")})"
             windowTitle = "$docTitle Documentation"
-            links("https://docs.oracle.com/javase/8/docs/api/")
+            // The old Java 8 API doc URL now redirects, which the JDK 25 javadoc tool treats as a
+            // fatal error. Linking to the JDK API is omitted to keep the build deterministic.
             isUse = true
             isVersion = true
             isAuthor = true

@@ -1,18 +1,16 @@
 // remove the main JAR from the archives artifacts
 configurations.archives.artifacts.clear()
 
-apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'com.gradleup.shadow'
 
 shadowJar {
-    classifier 'shaded'
+    archiveClassifier = 'shaded'
 }
 
 artifacts {
     archives shadowJar
 }
 
-// disable the jar task but do not remove it,
-// this is not nicely compatible with composite builds
-jar {
-    enabled false
-}
+// The root project is only an aggregator without own sources, so its jar is empty. It is kept
+// enabled because the "javacord" Maven publication references it via the "java" component, and
+// Gradle 9 no longer allows removing that artifact from the publication after it was populated.

@@ -2,7 +2,7 @@ import aQute.bnd.version.MavenVersion.parseMavenString
 
 plugins {
     `java-library`
-    id("biz.aQute.bnd.builder") version "6.3.1"
+    id("biz.aQute.bnd.builder") version "7.1.0"
 }
 
 repositories {

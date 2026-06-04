@@ -43,8 +43,10 @@ tasks.register("updateReadme") {
             rename { "README.md" }
             filteringCharset = Charsets.UTF_8.toString()
             expand(
-                "version" to version,
-                "log4jVersion" to log4jVersion
+                mapOf(
+                    "version" to version,
+                    "log4jVersion" to log4jVersion
+                )
             )
         }
         file(".github/README.md.sha256").writeText(calculateReadmeChecksum())

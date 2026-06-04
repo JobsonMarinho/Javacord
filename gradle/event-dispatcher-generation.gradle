@@ -27,6 +27,9 @@ buildscript {
 
 project(':javacord-core') {
     task generateEventDispatcher {
+        // The API and core main sources include the generated listener manager interfaces, so this
+        // task (which reads sourceSets.main.allJava) must run after they have been generated.
+        dependsOn ':generateListenerManagers'
         ext.outputDirectory = "$buildDir/generated/event-dispatcher"
 
         def javacordApi = project(':javacord-api')
@@ -291,6 +294,11 @@ project(':javacord-core') {
         }
     }
     compileJava.dependsOn generateEventDispatcher
+    // Gradle 9 requires every task that consumes the generated sources to declare a dependency on
+    // the generating task. These are configured lazily as they are created by later plugins.
+    tasks.matching { it.name in ['sourcesJar', 'javadoc', 'checkstyleMain'] }.configureEach {
+        dependsOn generateEventDispatcher
+    }
 
     idea {
         module {

@@ -329,6 +329,11 @@ configure([javacordApi, javacordCore]) {
         }
     }
     compileJava.dependsOn generateListenerManagers
+    // Gradle 9 requires every task that consumes the generated sources to declare a dependency on
+    // the generating task. These are configured lazily as they are created by later plugins.
+    tasks.matching { it.name in ['sourcesJar', 'javadoc', 'checkstyleMain'] }.configureEach {
+        dependsOn generateListenerManagers
+    }
 
     apply plugin: 'idea'
     idea {

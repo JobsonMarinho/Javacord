@@ -27,8 +27,13 @@ import org.javacord.api.entity.emoji.internal.CustomEmojiUpdaterDelegate;
 import org.javacord.api.entity.message.Message;
 import org.javacord.api.entity.message.component.internal.ActionRowBuilderDelegate;
 import org.javacord.api.entity.message.component.internal.ButtonBuilderDelegate;
+import org.javacord.api.entity.message.component.internal.CheckboxBuilderDelegate;
+import org.javacord.api.entity.message.component.internal.CheckboxGroupBuilderDelegate;
+import org.javacord.api.entity.message.component.internal.LabelBuilderDelegate;
+import org.javacord.api.entity.message.component.internal.RadioGroupBuilderDelegate;
 import org.javacord.api.entity.message.component.internal.SelectMenuBuilderDelegate;
 import org.javacord.api.entity.message.component.internal.SelectMenuOptionBuilderDelegate;
+import org.javacord.api.entity.message.component.internal.SelectableOptionBuilderDelegate;
 import org.javacord.api.entity.message.component.internal.TextInputBuilderDelegate;
 import org.javacord.api.entity.message.embed.internal.EmbedBuilderDelegate;
 import org.javacord.api.entity.message.internal.InteractionMessageBuilderDelegate;
@@ -447,6 +452,41 @@ public interface DelegateFactoryDelegate {
      * @return A new select menu option builder delegate.
      */
     SelectMenuOptionBuilderDelegate createSelectMenuOptionBuilderDelegate();
+
+    /**
+     * Creates a new selectable option builder delegate.
+     *
+     * @return A new selectable option builder delegate.
+     */
+    SelectableOptionBuilderDelegate createSelectableOptionBuilderDelegate();
+
+    /**
+     * Creates a new Label builder delegate.
+     *
+     * @return A new Label builder delegate.
+     */
+    LabelBuilderDelegate createLabelBuilderDelegate();
+
+    /**
+     * Creates a new Checkbox builder delegate.
+     *
+     * @return A new Checkbox builder delegate.
+     */
+    CheckboxBuilderDelegate createCheckboxBuilderDelegate();
+
+    /**
+     * Creates a new CheckboxGroup builder delegate.
+     *
+     * @return A new CheckboxGroup builder delegate.
+     */
+    CheckboxGroupBuilderDelegate createCheckboxGroupBuilderDelegate();
+
+    /**
+     * Creates a new RadioGroup builder delegate.
+     *
+     * @return A new RadioGroup builder delegate.
+     */
+    RadioGroupBuilderDelegate createRadioGroupBuilderDelegate();
 
     /**
      * Creates a new sticker builder delegate.

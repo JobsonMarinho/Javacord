@@ -58,4 +58,58 @@ public interface LowLevelComponent extends Component, Specializable<LowLevelComp
     default Optional<TextInput> asTextInput() {
         return isTextInput() ? Optional.of((TextInput) this) : Optional.empty();
     }
+
+    /**
+     * Whether this component is of this type.
+     *
+     * @return True if it's of that type.
+     */
+    default boolean isCheckbox() {
+        return getType() == ComponentType.CHECKBOX;
+    }
+
+    /**
+     * Gets the component as a Checkbox if it's of that type.
+     *
+     * @return The Checkbox.
+     */
+    default Optional<Checkbox> asCheckbox() {
+        return isCheckbox() ? Optional.of((Checkbox) this) : Optional.empty();
+    }
+
+    /**
+     * Whether this component is of this type.
+     *
+     * @return True if it's of that type.
+     */
+    default boolean isCheckboxGroup() {
+        return getType() == ComponentType.CHECKBOX_GROUP;
+    }
+
+    /**
+     * Gets the component as a CheckboxGroup if it's of that type.
+     *
+     * @return The CheckboxGroup.
+     */
+    default Optional<CheckboxGroup> asCheckboxGroup() {
+        return isCheckboxGroup() ? Optional.of((CheckboxGroup) this) : Optional.empty();
+    }
+
+    /**
+     * Whether this component is of this type.
+     *
+     * @return True if it's of that type.
+     */
+    default boolean isRadioGroup() {
+        return getType() == ComponentType.RADIO_GROUP;
+    }
+
+    /**
+     * Gets the component as a RadioGroup if it's of that type.
+     *
+     * @return The RadioGroup.
+     */
+    default Optional<RadioGroup> asRadioGroup() {
+        return isRadioGroup() ? Optional.of((RadioGroup) this) : Optional.empty();
+    }
 }

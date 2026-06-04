@@ -15,7 +15,11 @@ public enum ComponentType {
     TEXT_LABEL(10, false),
     GRID(12, false),
     DIVIDER(14, false),
-    LAYOUT(17, false);
+    LAYOUT(17, false),
+    LABEL(18, false),
+    RADIO_GROUP(21, false),
+    CHECKBOX_GROUP(22, false),
+    CHECKBOX(23, false);
 
     private static final ComponentType[] selectMenuTypes = Arrays.stream(ComponentType.values())
             .filter(ComponentType::isSelectMenuType)

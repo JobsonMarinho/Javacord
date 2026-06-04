@@ -27,8 +27,13 @@ import org.javacord.api.entity.emoji.internal.CustomEmojiUpdaterDelegate;
 import org.javacord.api.entity.message.Message;
 import org.javacord.api.entity.message.component.internal.ActionRowBuilderDelegate;
 import org.javacord.api.entity.message.component.internal.ButtonBuilderDelegate;
+import org.javacord.api.entity.message.component.internal.CheckboxBuilderDelegate;
+import org.javacord.api.entity.message.component.internal.CheckboxGroupBuilderDelegate;
+import org.javacord.api.entity.message.component.internal.LabelBuilderDelegate;
+import org.javacord.api.entity.message.component.internal.RadioGroupBuilderDelegate;
 import org.javacord.api.entity.message.component.internal.SelectMenuBuilderDelegate;
 import org.javacord.api.entity.message.component.internal.SelectMenuOptionBuilderDelegate;
+import org.javacord.api.entity.message.component.internal.SelectableOptionBuilderDelegate;
 import org.javacord.api.entity.message.component.internal.TextInputBuilderDelegate;
 import org.javacord.api.entity.message.embed.internal.EmbedBuilderDelegate;
 import org.javacord.api.entity.message.internal.InteractionMessageBuilderDelegate;
@@ -88,8 +93,13 @@ import org.javacord.core.entity.message.MessageBuilderBaseDelegateImpl;
 import org.javacord.core.entity.message.WebhookMessageBuilderDelegateImpl;
 import org.javacord.core.entity.message.component.internal.ActionRowBuilderDelegateImpl;
 import org.javacord.core.entity.message.component.internal.ButtonBuilderDelegateImpl;
+import org.javacord.core.entity.message.component.internal.CheckboxBuilderDelegateImpl;
+import org.javacord.core.entity.message.component.internal.CheckboxGroupBuilderDelegateImpl;
+import org.javacord.core.entity.message.component.internal.LabelBuilderDelegateImpl;
+import org.javacord.core.entity.message.component.internal.RadioGroupBuilderDelegateImpl;
 import org.javacord.core.entity.message.component.internal.SelectMenuBuilderDelegateImpl;
 import org.javacord.core.entity.message.component.internal.SelectMenuOptionBuilderDelegateImpl;
+import org.javacord.core.entity.message.component.internal.SelectableOptionBuilderDelegateImpl;
 import org.javacord.core.entity.message.component.internal.TextInputBuilderDelegateImpl;
 import org.javacord.core.entity.message.embed.EmbedBuilderDelegateImpl;
 import org.javacord.core.entity.message.mention.AllowedMentionsBuilderDelegateImpl;
@@ -360,6 +370,31 @@ public class DelegateFactoryDelegateImpl implements DelegateFactoryDelegate {
     @Override
     public SelectMenuOptionBuilderDelegate createSelectMenuOptionBuilderDelegate() {
         return new SelectMenuOptionBuilderDelegateImpl();
+    }
+
+    @Override
+    public SelectableOptionBuilderDelegate createSelectableOptionBuilderDelegate() {
+        return new SelectableOptionBuilderDelegateImpl();
+    }
+
+    @Override
+    public LabelBuilderDelegate createLabelBuilderDelegate() {
+        return new LabelBuilderDelegateImpl();
+    }
+
+    @Override
+    public CheckboxBuilderDelegate createCheckboxBuilderDelegate() {
+        return new CheckboxBuilderDelegateImpl();
+    }
+
+    @Override
+    public CheckboxGroupBuilderDelegate createCheckboxGroupBuilderDelegate() {
+        return new CheckboxGroupBuilderDelegateImpl();
+    }
+
+    @Override
+    public RadioGroupBuilderDelegate createRadioGroupBuilderDelegate() {
+        return new RadioGroupBuilderDelegateImpl();
     }
 
     @Override

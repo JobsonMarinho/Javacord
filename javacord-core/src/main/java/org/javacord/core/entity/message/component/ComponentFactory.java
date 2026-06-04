@@ -28,6 +28,14 @@ public class ComponentFactory {
                 return new GridComponentImpl(componentJson);
             case DIVIDER:
                 return new DividerComponentImpl(componentJson);
+            case LABEL:
+                return new LabelImpl(componentJson);
+            case CHECKBOX:
+                return new CheckboxImpl(componentJson);
+            case CHECKBOX_GROUP:
+                return new CheckboxGroupImpl(componentJson);
+            case RADIO_GROUP:
+                return new RadioGroupImpl(componentJson);
             // Fallback for components that are not yet implemented but are inside an action row
             case BUTTON:
                 return new ButtonImpl(componentJson);
